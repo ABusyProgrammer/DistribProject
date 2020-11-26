@@ -134,7 +134,7 @@
     });
     $(document).keypress(function(e){
         let keycode = e.keyCode;
-        if ((keycode > 47 && keycode < 58) || (keycode > 64 && keycode < 91) || (keycode > 97 && keycode < 122)) {
+        if ((keycode > 47 && keycode < 58) || (keycode > 64 && keycode < 91) || (keycode > 96 && keycode < 123)) {
             addVal(String.fromCharCode(e.charCode).toUpperCase());
         }
     });

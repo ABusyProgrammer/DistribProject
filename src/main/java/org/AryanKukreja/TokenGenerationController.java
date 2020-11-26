@@ -15,7 +15,6 @@ import java.util.UUID;
 public class TokenGenerationController {
 
     HashMap<String, Integer> tokens = new HashMap<>();
-
     @RequestMapping("/generate_token")
     public ModelAndView getToken(HttpServletRequest request, HttpServletResponse response) {
         ModelAndView mv = new ModelAndView();
@@ -42,7 +41,7 @@ public class TokenGenerationController {
             token = UUID.randomUUID().toString().toLowerCase();
         }
         tokens.put(token, 1);
-        mv.addObject("result", token);
+        mv.addObject("result", token.toUpperCase());
 
         // TODO: Change this to condition to check if token could not be generated
         if (1 != 1) {
@@ -84,6 +83,10 @@ public class TokenGenerationController {
         String num = request.getParameter("saveNumVal");
         String sec = request.getParameter("saveSecVal");
         String pin = request.getParameter("savePinVal");
+
+        System.out.println(num);
+        System.out.println(sec);
+        System.out.println(pin);
 
         if (pin.length() != 4) {
             mv.setViewName("checkoutComplete.jsp");

@@ -74,6 +74,7 @@
 <div style="margin-top: 5%"></div>
 <div class="center">
     <h1 style="margin-bottom: 40px"><strong>Credit Card Details</strong></h1>
+    <p>Click on an input box to enter/edit your information there</p>
 
     <div class="inputTokenLabel">Credit Card Number</div>
     <div id="saveNum" class="inputToken" onclick="setId('saveNum')"><h2></h2></div>
