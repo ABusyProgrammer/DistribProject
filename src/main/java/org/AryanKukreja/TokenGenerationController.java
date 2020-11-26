@@ -69,7 +69,6 @@ public class TokenGenerationController {
             this.tokens.remove(token);
         } else {
             mv.setViewName("checkoutToken.jsp");
-
             String error = "Failed to process token: Enter it again please.";
             mv.addObject("error", error);
         }
@@ -82,9 +81,20 @@ public class TokenGenerationController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("checkoutComplete.jsp");
 
-        String num = request.getParameter("saveNumVal").toLowerCase();
-        String sec = request.getParameter("saveSecVal").toLowerCase();
-        String pin = request.getParameter("savePinVal").toLowerCase();
+        String num = request.getParameter("saveNumVal");
+        String sec = request.getParameter("saveSecVal");
+        String pin = request.getParameter("savePinVal");
+
+        if (pin.length() != 4) {
+            mv.setViewName("checkoutComplete.jsp");
+            mv.addObject("error", "Pin must be 4 numbers");
+            return mv;
+        }
+        else if (num.length() < 13 || num.length() > 19) {
+            mv.setViewName("checkoutComplete.jsp");
+            mv.addObject("error", "Credit card number must be between 13 and 19 numbers");
+            return mv;
+        }
 
         // TODO Do your processing here with the pin number
         if (1 != 1) {
