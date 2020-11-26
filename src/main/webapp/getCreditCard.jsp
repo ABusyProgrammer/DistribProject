@@ -10,6 +10,7 @@
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style>
         .center {
             margin: auto;
@@ -118,6 +119,19 @@
 <script>
     let id = "saveNum";
     let regVal = document.getElementById(id);
+
+    window.addEventListener("keydown", function(e){
+        if(e.keyCode === 8) {
+            e.preventDefault();
+            removeLastChar();
+        }
+    });
+    $(document).keypress(function(e){
+        let keycode = e.keyCode;
+        if ((keycode > 47 && keycode < 58)/*  || (keycode > 64 && keycode < 91) || (keycode > 97 && keycode < 122) */) {
+            addVal(String.fromCharCode(e.charCode).toUpperCase());
+        }
+    });
 
     function addVal(val) {
         regVal = document.getElementById(id);

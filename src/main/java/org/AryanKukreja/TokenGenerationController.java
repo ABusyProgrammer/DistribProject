@@ -17,9 +17,25 @@ public class TokenGenerationController {
     HashMap<String, Integer> tokens = new HashMap<>();
 
     @RequestMapping("/generate_token")
-    public ModelAndView getToken() {
+    public ModelAndView getToken(HttpServletRequest request, HttpServletResponse response) {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("successTokenGenerated.jsp");
+
+        String license;
+        try {
+            license = request.getParameter("saveVal").toLowerCase();
+        } catch (Exception e) {
+            mv.setViewName("welcome.jsp");
+            mv.addObject("error", "Failed to create token: Try again.");
+
+            return mv;
+        }
+
+        if (license.length() < 7) {
+            mv.setViewName("welcome.jsp");
+            mv.addObject("error", "You must enter a license");
+        }
+        System.out.println(license);
 
         String token = UUID.randomUUID().toString().toLowerCase();
         while (this.tokens.containsKey(token)) {

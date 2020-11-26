@@ -2,11 +2,13 @@
 <html>
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style>
         .center {
             margin: auto;
             width: 60%;
-            height: 80%;
+            height: 85%;
             border: 3px solid #000000;
             border-radius: 40px;
             padding: 10px;
@@ -21,8 +23,29 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 200px;
-            padding: 100px;
+            padding: 20px 100px;
+        }
+
+        .number {
+            border: 5px solid white;
+            border-bottom: 10px solid white;
+            cursor: pointer;
+            background: grey;
+        }
+
+        .normal {
+            border: 5px solid white;
+            cursor: pointer;
+        }
+
+        .inputToken {
+            height: 50px;
+            width: 90%;
+            margin-left: 5%;
+            border: 2px solid red;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
         }
     </style>
     <title>Parking Ltd</title>
@@ -34,29 +57,97 @@
     <div style="padding-left: 100px; padding-right: 100px;">
         Welcome to the Parking Lot! Please take a token from below, and keep it safe as you will have to return it back
         when exiting.
-        <br>
-        The following are the parking charges for this parking lot:
-        <br>
-        <br>
+        <br><br>
         <b>Weekdays</b>
         <ul>
             <li>5am - 9am: <i>5$/hour</i></li>
             <li>9am - 5pm: <i>8$/hour</i></li>
-            <li>5pm - 12am: <i>6$/hour</i></li>
         </ul>
-        <br>
-        <b>Weekends</b>
-        <ul>
-            <li>5am - 9am: <i>7$/hour</i></li>
-            <li>9am - 5pm: <i>10$/hour</i></li>
-            <li>5pm - 12am: <i>9$/hour</i></li>
-        </ul>
+        <b>Weekends: 7$/hour</b>
     </div>
+    <br>
+    <h3 style="text-align: center">Please Enter your License Plate</h3>
+    <div id="license" class="inputToken"><h2></h2></div>
+    <table style="width: 80%; margin-left: 10%; margin-top: 40px; text-align: center; background: black; color: white; font-weight: bolder">
+        <tr style="height: 40px; font-size: 24px">
+            <td class="number" onclick="addVal('0')"><i>0</i></td>
+            <td class="number" onclick="addVal('1')"><i>1</i></td>
+            <td class="number" onclick="addVal('2')"><i>2</i></td>
+            <td class="number" onclick="addVal('3')"><i>3</i></td>
+            <td class="number" onclick="addVal('4')"><i>4</i></td>
+            <td class="number" onclick="addVal('5')"><i>5</i></td>
+            <td class="number" onclick="addVal('6')"><i>6</i></td>
+            <td class="number" onclick="addVal('7')"><i>7</i></td>
+            <td class="number" onclick="addVal('8')"><i>8</i></td>
+            <td class="number" onclick="addVal('9')"><i>9</i></td>
+        </tr>
+        <tr style="height: 50px; font-size: 24px">
+            <td class="normal" onclick="addVal('Q')">Q</td>
+            <td class="normal" onclick="addVal('W')">W</td>
+            <td class="normal" onclick="addVal('E')">E</td>
+            <td class="normal" onclick="addVal('R')">R</td>
+            <td class="normal" onclick="addVal('T')">T</td>
+            <td class="normal" onclick="addVal('Y')">Y</td>
+            <td class="normal" onclick="addVal('U')">U</td>
+            <td class="normal" onclick="addVal('I')">I</td>
+            <td class="normal" onclick="addVal('O')">O</td>
+            <td class="normal" onclick="addVal('P')">P</td>
+        </tr>
+        <tr style="height: 50px; font-size: 24px">
+            <td class="normal" onclick="addVal('A')">A</td>
+            <td class="normal" onclick="addVal('S')">S</td>
+            <td class="normal" onclick="addVal('D')">D</td>
+            <td class="normal" onclick="addVal('F')">F</td>
+            <td class="normal" onclick="addVal('G')">G</td>
+            <td class="normal" onclick="addVal('H')">H</td>
+            <td class="normal" onclick="addVal('J')">J</td>
+            <td class="normal" onclick="addVal('K')">K</td>
+            <td class="normal" onclick="addVal('L')">L</td>
+            <td class="normal" onclick="removeLastChar()"><i class="material-icons" style="font-size:20px">backspace</i></td>
+        </tr>
+        <tr style="height: 50px; font-size: 24px">
+            <td style="border: 5px solid white; cursor: pointer; background: white"> </td>
+            <td style="border: 5px solid white; cursor: pointer; background: white"> </td>
+            <td class="normal" onclick="addVal('X')">X</td>
+            <td class="normal" onclick="addVal('C')">C</td>
+            <td class="normal" onclick="addVal('V')">V</td>
+            <td class="normal" onclick="addVal('B')">B</td>
+            <td class="normal" onclick="addVal('N')">N</td>
+            <td class="normal" onclick="addVal('M')">M</td>
+            <td style="border: 5px solid white; cursor: pointer; background: white"> </td>
+            <td style="border: 5px solid white; cursor: pointer; background: white"> </td>
+        </tr>
+    </table>
     <form action="generate_token" class="buttonCenter">
+        <input id="saveVal" name="saveVal" type="text" hidden value="">
         <input type="submit" class="btn btn-primary btn-lg btn-block" value="Click Here to Get Your Token">
     </form>
-    <div style="margin-top: 50px; color: red; font-weight: bold; text-align: center; width: 100%"> ${error} </div>
+    <div style="color: red; font-weight: bold; text-align: center; width: 100%"> ${error} </div>
 </div>
+<script>
+    let license = document.getElementById("license");
+    window.addEventListener("keydown", function(e){
+        if(e.keyCode === 8) {
+            e.preventDefault();
+            removeLastChar();
+        }
+    });
+    $(document).keypress(function(e){
+        let keycode = e.keyCode;
+        if ((keycode > 47 && keycode < 58) || (keycode > 64 && keycode < 91) || (keycode > 97 && keycode < 122)) {
+            addVal(String.fromCharCode(e.charCode).toUpperCase());
+        }
+    });
 
+    function addVal(val) {
+        license.innerText += val;
+        document.getElementById('saveVal').value = license.innerText;
+    }
+
+    function removeLastChar() {
+        license.innerText = license.innerText.slice(0, -1);
+        document.getElementById('saveVal').value = license.innerText;
+    }
+</script>
 </body>
 </html>
